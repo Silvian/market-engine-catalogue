@@ -1,0 +1,14 @@
+[tool.black]
+line-length = 100
+target-version = ["py38"]  # 3.9 isn't supported yet
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+env_files = [
+    ".env.development"
+]
+minversion = 7.0
+testpaths = "tests"
+asyncio_mode = "auto"

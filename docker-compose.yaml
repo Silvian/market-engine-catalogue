@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  app:
+    image: market-engine-catalogue
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file:
+      - .env.development
+    depends_on:
+      - db
+    ports:
+      - "50051:50051"
+
+  db:
+    image: postgres:12.4
+    env_file:
+      - .env.development
+    environment:
+      POSTGRES_DB: market_engine_catalogue
+      POSTGRES_PASSWORD: password
+    volumes:
+      - market-engine-catalogue-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  market-engine-catalogue-db:
