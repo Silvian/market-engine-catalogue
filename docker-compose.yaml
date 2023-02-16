@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  app:
+  service:
     image: market-engine-catalogue
     restart: always
     build:
@@ -16,6 +16,8 @@ services:
       - db
     ports:
       - "50051:50051"
+    expose:
+      - "50051"
 
   db:
     image: postgres:12.4

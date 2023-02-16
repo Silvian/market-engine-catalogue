@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package grpc;
+
+service Catalogue {
+  rpc listCatalogueItems(ItemsRequest) returns (Items);
+
+  rpc getItemDetails(ItemDetailsRequest) returns (ItemDetails);
+}
+
+message ItemsRequest {
+  int32 itemsLimit = 1;
+}
+
+message Items {
+
+  message Item {
+    string id = 1;
+    string name = 2;
+    optional string image = 3;
+    optional float rating = 4;
+  }
+
+  repeated Item items = 1;
+}
+
+message ItemDetailsRequest {
+  string itemId = 1;
+  int32 reviewsLimit = 2;
+}
+
+message ItemDetails {
+  string id = 1;
+  string name = 2;
+  optional string image = 3;
+  optional float rating = 4;
+  string description = 5;
+
+  message Review {
+    string id = 1;
+    string item_id = 2;
+    float rating = 3;
+    optional string comment = 4;
+  }
+
+  repeated Review reviews = 6;
+}
